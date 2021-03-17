@@ -54,11 +54,18 @@ fetch(markdownFilename)
     const deck = new Reveal({
       plugins: [Markdown]
     })
+    // https://revealjs.com/config/
     deck.initialize({
+      // presentation sizing config
       width: 1280,
       height: 720,
-      slideNumber: true,
       minScale: 0.2,
-      maxScale: 1.1
+      maxScale: 1.1,
+      // show the slide number on the page
+      // and in the hash fragment and
+      // make sure they are the same
+      slideNumber: true,
+      hash: true,
+      hashOneBasedIndex: true
     })
   })
