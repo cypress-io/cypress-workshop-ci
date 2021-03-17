@@ -240,3 +240,5 @@ Build the app and run the tests on CI
 - on every pull request
 
 Goal 🥅 is to have full confidence in the deployed application
+
+Next: [Generic CI](/?p=generic-ci)

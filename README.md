@@ -12,3 +12,4 @@ See the presentation at [https://cypress-workshop-ci.netlify.app/][presentation]
 topic | Markdown | view slides
 ---|---|---
 Introduction | [intro](./slides/intro/README.md) | [intro slides](https://cypress-workshop-ci.netlify.app/?p=intro)
+Generic CI | [generic-ci](./slides/generic-ci/README.md) | [generic ci slides](https://cypress-workshop-ci.netlify.app/?p=generic-ci)
