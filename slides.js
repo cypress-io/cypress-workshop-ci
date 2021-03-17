@@ -52,7 +52,13 @@ fetch(markdownFilename)
       '</section>\n'
 
     const deck = new Reveal({
-      plugins: [Markdown],
+      plugins: [Markdown]
     })
-    deck.initialize({ width: 1280, height: 720, slideNumber: true, minScale: 0.2, maxScale: 1.1 })
+    deck.initialize({
+      width: 1280,
+      height: 720,
+      slideNumber: true,
+      minScale: 0.2,
+      maxScale: 1.1
+    })
   })

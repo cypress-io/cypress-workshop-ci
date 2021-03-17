@@ -1,3 +1,3 @@
 export default {
-  publicDir: 'slides',
+  publicDir: 'slides'
 }
