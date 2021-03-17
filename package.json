@@ -1,0 +1,22 @@
+{
+  "name": "cypress-workshop-ci",
+  "version": "1.0.0",
+  "description": "A workshop that teaches you how to run Cypress on major CI providers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cypress-io/cypress-workshop-ci.git"
+  },
+  "keywords": [
+    "cypress-workshop"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cypress-io/cypress-workshop-ci/issues"
+  },
+  "homepage": "https://github.com/cypress-io/cypress-workshop-ci#readme"
+}
