@@ -9,6 +9,6 @@ See the presentation at [https://cypress-workshop-ci.netlify.app/][presentation]
 
 ## Content 🗂
 
-topic | README | slides
+topic | Markdown | view slides
 ---|---|---
-Introduction | [intro/README](./slides/intro/README.md) | [intro slides](https://cypress-workshop-ci.netlify.app/?p=intro)
+Introduction | [intro](./slides/intro/README.md) | [intro slides](https://cypress-workshop-ci.netlify.app/?p=intro)

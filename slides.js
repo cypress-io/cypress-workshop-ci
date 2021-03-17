@@ -1,8 +1,18 @@
+import 'reveal.js/dist/reset.css'
 import 'reveal.js/dist/reveal.css'
 // custom theme from https://github.com/dzello/revealjs-themes
 import './themes/robot-lung.css'
+
+// pick code block syntax highlighting theme
+// included with Reveal.js are monokai and zenburn
+// import 'reveal.js/plugin/highlight/monokai.css'
+// more themes from Highlight.js
+// import 'highlight.js/styles/purebasic.css'
+import 'highlight.js/styles/docco.css'
+
 import Reveal from 'reveal.js'
 import Markdown from 'reveal.js/plugin/markdown/markdown.esm.js'
+import RevealHighlight from 'reveal.js/plugin/highlight/highlight.esm.js'
 
 // something like
 // {BASE_URL: "/reveal-markdown-example/", MODE: "development", DEV: true, PROD: false, SSR: false}
@@ -52,7 +62,7 @@ fetch(markdownFilename)
       '</section>\n'
 
     const deck = new Reveal({
-      plugins: [Markdown]
+      plugins: [Markdown, RevealHighlight]
     })
     // https://revealjs.com/config/
     deck.initialize({
