@@ -2,7 +2,7 @@
 
 How to run Cypress on popular CI services
 
-- [github.com/cypress-io/cypress-workshop-ci](https://github.com/cypress-io/cypress-workshop-ci)
+Code at [github.com/cypress-io/cypress-workshop-ci](https://github.com/cypress-io/cypress-workshop-ci)
 
 +++
 ## Gleb Bahmutov, PhD

@@ -2,9 +2,10 @@
   "name": "cypress-workshop-ci",
   "version": "1.0.0",
   "description": "A workshop that teaches you how to run Cypress on major CI providers",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
