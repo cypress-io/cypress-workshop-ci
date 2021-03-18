@@ -13,3 +13,7 @@ topic | Markdown | view slides
 ---|---|---
 Introduction | [intro](./slides/intro/README.md) | [intro slides](https://cypress-workshop-ci.netlify.app/?p=intro)
 Generic CI | [generic-ci](./slides/generic-ci/README.md) | [generic ci slides](https://cypress-workshop-ci.netlify.app/?p=generic-ci)
+
+## Example application
+
+In the repo [cypress-io/cypress-workshop-ci-example](https://github.com/cypress-io/cypress-workshop-ci-example) that you should fork and use.
