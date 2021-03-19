@@ -8,6 +8,9 @@ Using [GitHub Actions](https://glebbahmutov.com/blog/trying-github-actions/) as 
 - Installing and caching Cypress itself
 - How to start server and run Cypress tests
 
+
+💡 All our docs are at [https://on.cypress.io/ci](https://on.cypress.io/ci)
+
 ---
 ### GH Actions workflow
 
@@ -69,12 +72,6 @@ Typically Windows and Mac machines should have everything necessary to run Cypre
 - 🚨 Tests are very slow
 - ✅ See our notes at [on.cypress.io/ci#Machine-requirements](https://on.cypress.io/ci#Machine-requirements)
 
-+++
-
-## Continuous Integration Docs 📚
-
-All our docs are at [https://on.cypress.io/ci](https://on.cypress.io/ci)
-
 ---
 ## 💡 Flakey CI
 
@@ -102,6 +99,12 @@ Running tests on CI is like getting a brand new laptop every day - you have to i
 - If using Yarn to install dependencies
   - use `yarn install --frozen-lockfile`
   - cache `~/.cache` folder
+
+**Tip:** Cypress cache command
+
+```
+$ npx cypress cache path
+```
 
 See 📚 at [on.cypress.io/caching](https://on.cypress.io/caching)
 
@@ -154,3 +157,48 @@ Push a few commits to see the caching timings
 ## Caching works
 
 ![Caching dropped time from 50 to 20 seconds](./images/caching-works.png)
+
++++
+## ⚠️ Caching usually needs two commands
+
+Typically CIs have one command to restore previous cache and another command to save the cache.
+
+```yml
+# CircleCI
+- restore_cache:
+    keys:
+      - dependencies-{{ checksum "package.json" }}
+- run: npm ci
+# tip: cache the verified status
+- run: npx cypress verify
+- save_cache:
+    key: dependencies-{{ checksum "package.json" }}
+    paths:
+    - ~/.npm
+    - ~/.cache
+```
++++
+## ⚠️ Use precise cache key
+
+```yml
+- restore_cache:
+    keys:
+      - dependencies-{{ checksum "package.json" }}
+      # 🚨 NOT RECOMMENDED fallback cache key
+      - dependencies-
+```
+
+Check how many versions of Cypress you have after install
+
+```
+npx cypress cache list
+```
+
+```yml
+- restore_cache:
+    keys:
+      # ✅ use single precise cache key
+      - dependencies-{{ checksum "package-lock.json" }}
+```
+
+Read [https://glebbahmutov.com/blog/do-not-let-cypress-cache-snowball/](https://glebbahmutov.com/blog/do-not-let-cypress-cache-snowball/)

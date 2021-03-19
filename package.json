@@ -4,6 +4,7 @@
   "description": "A workshop that teaches you how to run Cypress on major CI providers",
   "private": true,
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "vite build"
   },
