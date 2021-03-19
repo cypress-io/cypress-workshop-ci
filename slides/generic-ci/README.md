@@ -7,7 +7,7 @@ Using [GitHub Actions](https://glebbahmutov.com/blog/trying-github-actions/) as 
 - Cypress Docker images for dependencies
 - Installing and caching Cypress itself
 - How to start server and run Cypress tests
-
+- How to record test artifacts
 
 💡 All our docs are at [https://on.cypress.io/ci](https://on.cypress.io/ci)
 
@@ -310,3 +310,103 @@ When using `cypress run` Cypress automatically records the video of the entire t
 ### Test screenshot showing the failure
 
 ![Test screenshot at the moment of failure](./images/screenshot.png)
+
+---
+## 🎥 Record test artifacts on Cypress Dashboard
+
+- CI-agnostic
+- all information in one place
+- parallelization, analytics, flake detection, other benefits
+- GitHub, GitLab, Bitbucket, Slack integrations
+- free plan [www.cypress.io/pricing](https://www.cypress.io/pricing)
+
++++
+### Set up the project to record
+
+![Click the Runs tab in the Test Runner](./images/record-00.png)
++++
+### Pick organization
+
+![Pick organization](./images/record-01.png)
++++
+### Create new project
+![Create new project](./images/record-02.png)
++++
+### Copy the secret record key
+![Copy the shown record key](./images/record-03.png)
++++
+### Set the record key on CI
+![Record key as secret](./images/record-04.png)
++++
+Use `cypress run --record` command
+
+```yml
+- name: Start the app 📤
+  run: npm start &
+
+- name: Run Cypress tests 🧪
+  run: npx cypress run --record
+  env:
+    # pass the record key as environment variable
+    # during this CI step
+    CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+```
+
++++
+### The recorded run URL
+
+![Record run URL](./images/record-05.png)
+
++++
+### Dashboard run
+
+![Dashboard run](./images/dashboard.png)
+
+Debug the failure by watching the movie and inspecting the error screenshots
+
+---
+### TODO: Run the tests in different browser
+
+- find the available browsers installed on CI
+- use `cypress run --record --browser ...` to pick the browser
+
+---
+### TODO: Run the tests on a different OS
+
+- `runs-on: ubuntu-20.04`
+- `runs-on: windows-latest`
+- `runs-on: macos-latest`
+
++++
+### Run tests on every OS
+
+```yml
+jobs:
+  build-and-test:
+    strategy:
+      # do not stop the matrix if one of the jobs fails
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-20.04]
+    runs-on: ${{ matrix.os }}
+```
+
+📝 [glebbahmutov.com/blog/trying-github-actions](https://glebbahmutov.com/blog/trying-github-actions)
+
++++
+![Parallel test jobs](./images/parallel-jobs.png)
+
+---
+**TODO:** Add README badge
+
+![Cypress Dashboard badge](./images/badge.png)
+
+---
+## ⌛️ Review
+
+- installing and caching Cypress on CI
+- running the server and waiting for the URL to respond
+- downloading the test artifacts
+- recording on Cypress Dashboard
+
+📚 Cypress documentation [https://on.cypress.io/ci](https://on.cypress.io/ci)
