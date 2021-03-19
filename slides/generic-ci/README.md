@@ -202,3 +202,111 @@ npx cypress cache list
 ```
 
 Read [https://glebbahmutov.com/blog/do-not-let-cypress-cache-snowball/](https://glebbahmutov.com/blog/do-not-let-cypress-cache-snowball/)
+
+---
+### Wait for the application to start
+
+Sometimes the `npm start` takes a while to launch the application.
+
+```yml
+- name: Start the app 📤
+  run: npm start &
+- name: Wait for URL ⏰
+  run: npx wait-on http://localhost:8080
+```
+
+Use utility like [wait-on](https://github.com/jeffbski/wait-on#readme)
+---
+### 💡 Skip Cypress binary install
+
+Set an environment variable to skip the Cypress installation
+
+```
+CYPRESS_INSTALL_BINARY=0
+```
+
+If you want to force install again `npx cypress install`
+
+See 📚 [on.cypress.io/installing](https://on.cypress.io/installing)
+---
+### 💡 Single command to start and test
+
+Check out utility [start-server-and-test](https://github.com/bahmutov/start-server-and-test)
+
+```
+$ npm i -D start-server-and-test
++ start-server-and-test@1.12.1
+```
+
+```json
+{
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "e2e": "start-test 8080 cy:run"
+  }
+}
+```
+
+On CI run `npm run e2e`
+
+```yml
+- name: Build the app 🏗
+  run: npm run build
+
+- name: Run Cypress tests 🧪
+  run: npm run e2e
+```
+
+---
+### 🤷‍♂️ What happens when a test fails on CI?
+
+```diff
+- cy.location('pathname').should('equal', '/README/')
++ cy.location('pathname').should('equal', '/READMEZ/')
+```
+
++++
+![Action shows a failed CI job](./images/test-fails.png)
+
++++
+![Failed test output](./images/failed-message.png)
+
++++
+### Where are the screenshots and videos?
+
+![Recorded screenshot and video](./images/failed-artifacts.png)
+
+When using `cypress run` Cypress automatically records the video of the entire test run and takes a screenshot on failure.
++++
+### Store test artifacts (CI-specific)
+
+```yml
+- name: Run Cypress tests 🧪
+  run: npm run e2e
+
+- name: Upload any screenshots and videos 📼
+  uses: actions/upload-artifact@v2
+  # make sure to run this step
+  # even if the previous step fails
+  if: always()
+  with:
+    name: test-artifacts
+    path: |
+      cypress/videos
+      cypress/screenshots
+```
++++
+### Job test artifacts
+
+![Test artifacts](./images/job-artifacts.png)
++++
+### Downloaded unzipped files
+
+![Downloaded files](./images/downloaded.png)
++++
+### Test screenshot showing the failure
+
+![Test screenshot at the moment of failure](./images/screenshot.png)
