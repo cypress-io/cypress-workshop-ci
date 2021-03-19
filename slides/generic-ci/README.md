@@ -410,3 +410,5 @@ jobs:
 - recording on Cypress Dashboard
 
 📚 Cypress documentation [https://on.cypress.io/ci](https://on.cypress.io/ci)
+
+Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action)

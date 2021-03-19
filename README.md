@@ -13,6 +13,7 @@ topic | Markdown | view slides
 ---|---|---
 Introduction | [intro](./slides/intro/README.md) | [intro slides](https://cypress-workshop-ci.netlify.app/?p=intro)
 Generic CI | [generic-ci](./slides/generic-ci/README.md) | [generic ci slides](https://cypress-workshop-ci.netlify.app/?p=generic-ci)
+GitHub Action | [github-action](./slides/github-action/README.md) | [github-action slides](https://cypress-workshop-ci.netlify.app/?p=github-action)
 
 ## Example application
 
