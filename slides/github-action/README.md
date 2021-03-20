@@ -288,3 +288,100 @@ jobs:
 +++
 ![Two jobs ran in parallel](./images/two-jobs-recorded.png)
 The Dashboard recording
+
+---
+### TODO: Split the build
+
+- one job to build the site
+  - uploads the built folder
+- second job (parallel 3x) tests the site
+  - downloads the built folder
+  - starts the server
+  - runs the tests
+
+**Tip:** you can use Cypress GH Action to install without running tests
+
++++
+```yml
+name: ci
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Run Cypress tests 🧪
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+          build: npm run build
+        env:
+          # we do not need to install Cypress itself
+          # as we do not plan to run tests
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Upload built folder 📤
+        uses: actions/upload-artifact@v2
+        with:
+          name: built
+          path: _site
+
+  all-tests:
+    runs-on: ubuntu-20.04
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        containers: [1, 2, 3]
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Download built folder 📥
+        uses: actions/download-artifact@v2
+        with:
+          name: built
+          path: _site
+
+      - name: Show built folder 👀
+        run: ls -la _site
+
+      - name: Run Cypress tests 🧪
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          parallel: true
+          start: npm start
+          wait-on: 'http://localhost:8080'
+          group: All specs
+        env:
+          # pass the record key as environment variable
+          # during this CI step
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+```
++++
+### The workflow
+
+![Workflow with the build job](./images/build-job.png)
+
+---
+## Advanced topics
+
+- re-run job on failure using `GITHUB_TOKEN`, check [cypress-io/github-action](https://github.com/cypress-io/github-action) examples
+- run smoke test after deploying the site
+  - [glebbahmutov.com/blog/triple-tested/](https://glebbahmutov.com/blog/triple-tested/)
+  - [glebbahmutov.com/blog/versioned-doc-pages/](https://glebbahmutov.com/blog/versioned-doc-pages/)
+- more parallelization examples [glebbahmutov.com/blog/parallel-cypress-tests-gh-action/](https://glebbahmutov.com/blog/parallel-cypress-tests-gh-action/)
+- working inside a monorepo [https://glebbahmutov.com/blog/test-monorepo-apps/](https://glebbahmutov.com/blog/test-monorepo-apps/)
+
+---
+## ⌛️ Review
+
+- using [cypress-io/github-action](https://github.com/cypress-io/github-action) is the simplest way to install, cache, and run Cypress tests
+- run parallel jobs to speed up the tests
+- separate jobs in the workflow when makes sense
+
+Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action)
