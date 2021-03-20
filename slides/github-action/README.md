@@ -135,3 +135,156 @@ jobs:
 ### Dashboard machines view
 
 ![Dashboard machines view](./images/machines.png)
+
+---
+### Recording Groups
+
+**Todo:** move one spec into "smoke" folder
+
+![Smoke spec and 3 other specs](./images/smoke.png)
++++
+**Todo:** update the `ci.yml`
+
+We want to run the smoke specs separately.
+- first run all specs
+- second run just the smoke specs
+- give each group its own name
+
+[github.com/cypress-io/github-action#examples](https://github.com/cypress-io/github-action#examples)
+
++++
+```yml
+name: ci
+on: [push]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        containers: [1, 2, 3]
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Run Cypress tests 🧪
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          parallel: true
+          start: npm start
+          wait-on: 'http://localhost:8080'
+          group: All specs
+        env:
+          # pass the record key as environment variable
+          # during this CI step
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+      - name: Run Smoke tests 💨
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          parallel: true
+          start: npm start
+          wait-on: 'http://localhost:8080'
+          group: Smoke specs
+          spec: 'cypress/integration/smoke/**/*.js'
+        env:
+          # pass the record key as environment variable
+          # during this CI step
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+```
+
++++
+![Smoke run on GitHub Actions](./images/smoke-run.png)
+
+❓ What do you see in the output from each machine?
+
++++
+![Two groups recorded in the same run](./images/smoke-groups.png)
+
+❓ How did Cypress load balance these groups?
++++
+**Todo:** avoid the second install in the smoke tests
+
+```yml
+- name: Run Smoke tests 💨
+  uses: cypress-io/github-action@v2
+  with:
+    ???
+    record: true
+    parallel: true
+    start: npm start
+    wait-on: 'http://localhost:8080'
+    group: Smoke specs
+    spec: 'cypress/integration/smoke/**/*.js'
+  env:
+    # pass the record key as environment variable
+    # during this CI step
+    CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+```
+
+[github.com/cypress-io/github-action#examples](https://github.com/cypress-io/github-action#examples)
+
+---
+## Separate jobs
+
+**Todo:** have one job run all specs and another job run the smoke specs
++++
+```yml
+name: ci
+on: [push]
+jobs:
+  all-tests:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        containers: [1, 2, 3]
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Run Cypress tests 🧪
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          parallel: true
+          start: npm start
+          wait-on: 'http://localhost:8080'
+          group: All specs
+        env:
+          # pass the record key as environment variable
+          # during this CI step
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+  smoke-tests:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Run Smoke tests 💨
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+          start: npm start
+          wait-on: 'http://localhost:8080'
+          group: Smoke specs
+          spec: 'cypress/integration/smoke/**/*.js'
+        env:
+          # pass the record key as environment variable
+          # during this CI step
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+```
+
++++
+### The workflow
+
+![GitHub Actions workflow with two jobs](./images/two-jobs.png)
+
++++
+![Two jobs ran in parallel](./images/two-jobs-recorded.png)
+The Dashboard recording
