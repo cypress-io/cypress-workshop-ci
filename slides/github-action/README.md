@@ -11,7 +11,7 @@
 ---
 ## Motivation
 
-You don't need to fiddle with caching, installation, flags, recording, etc. Let us (Cypress authors) write the CI configuration code.
+You don't need to fiddle with caching, installation, flags, recording, etc. Let us (Cypress authors) write the CI configuration code (in JavaScript!).
 
 Repo [github.com/cypress-io/github-action](https://github.com/cypress-io/github-action)
 +++
@@ -67,6 +67,13 @@ Use the above workflow and inspect the run
     # during this CI step
     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 ```
+
+---
+## Action versioning
+
+- `uses: cypress-io/github-action@v2` uses the latest v2 branch of the action
+- `uses: cypress-io/github-action@v2.9.3` uses specific tag
+- `uses: cypress-io/github-action@dbe898` uses specific commit
 
 ---
 ## Run tests in parallel

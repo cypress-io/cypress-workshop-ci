@@ -4,7 +4,7 @@ How to run Cypress on popular CI services
 
 Code at [github.com/cypress-io/cypress-workshop-ci](https://github.com/cypress-io/cypress-workshop-ci)
 
-Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action)
+Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action), [CircleCI](/?p=circleci), [Netlify Build](/?p=netlify-build)
 
 ---
 ## Gleb Bahmutov, PhD
@@ -245,4 +245,4 @@ Build the app and run the tests on CI
 
 Goal 🥅 is to have full confidence in the deployed application
 
-Next: [Generic CI](/?p=generic-ci)
+Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action), [CircleCI](/?p=circleci), [Netlify Build](/?p=netlify-build)

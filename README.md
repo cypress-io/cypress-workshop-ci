@@ -30,9 +30,9 @@ topic | Markdown | view slides
 ---|---|---
 Introduction | [intro](./slides/intro/README.md) | [intro slides](https://cypress-workshop-ci.netlify.app/?p=intro)
 Generic CI | [generic-ci](./slides/generic-ci/README.md) | [generic ci slides](https://cypress-workshop-ci.netlify.app/?p=generic-ci)
-GitHub Action | [github-action](./slides/github-action/README.md) | [github-action slides](https://cypress-workshop-ci.netlify.app/?p=github-action)
-TODO: Circle CI
-TODO: Netlify
+GitHub Action | [github-action](./slides/github-action/README.md) | [github action slides](https://cypress-workshop-ci.netlify.app/?p=github-action)
+Circle CI Orb | [circleci](./slides/circleci/README.md) | [circleci slides](https://cypress-workshop-ci.netlify.app/?p=circleci)
+Netlify Build plugin | [netlify-build](./slides/netlify-build/README.md) | [netlify build slides](https://cypress-workshop-ci.netlify.app/?p=netlify-build)
 
 ## Example application
 

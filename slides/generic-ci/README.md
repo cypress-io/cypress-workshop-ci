@@ -411,4 +411,4 @@ jobs:
 
 📚 Cypress documentation [https://on.cypress.io/ci](https://on.cypress.io/ci)
 
-Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action)
+Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action), [CircleCI](/?p=circleci), [Netlify Build](/?p=netlify-build)
