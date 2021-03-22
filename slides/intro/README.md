@@ -47,14 +47,16 @@ Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action)
 
 You will need:
 
-- [GitHub account](https://github.com/)
-  - 👉 fork the [cypress-io/cypress-workshop-ci-example](https://github.com/cypress-io/cypress-workshop-ci-example) now 👈
-- [CircleCI account](https://circleci.com/)
-- [Netlify account](https://www.netlify.com/)
-- [Cypress Dashboard account](https://dashboard.cypress.io/)
-
-- `git` to clone repos
+- `git` to clone the repository
 - Node v12+ to install and run locally
+- 👉 fork the [cypress-io/cypress-workshop-ci-example](https://github.com/cypress-io/cypress-workshop-ci-example) now 👈
+
+### Create free accounts
+
+- GitHub [https://github.com/](https://github.com/)
+- CircleCI [https://circleci.com/](https://circleci.com/)
+- Netlify [https://www.netlify.com/](https://www.netlify.com/)
+- Cypress Dashboard [https://dashboard.cypress.io/](https://dashboard.cypress.io/)
 
 ---
 ## Forked example repo
