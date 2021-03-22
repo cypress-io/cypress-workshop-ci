@@ -236,3 +236,98 @@ workflows:
     - cypress/run
   version: 2
 ```
+
+---
+## Parallel testing
+
+```diff
+  - cypress/run:
+      start: npm start
+      wait-on: 'http://localhost:8080'
+      no-workspace: true
+      record: true
+      tags: circleci
++     parallel: true
++     parallelism: 2
+```
+
+[github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb)
+
++++
+
+![Failed job](./images/failed.png)
+
++++
+We need to install dependencies using 1 job, then run multiple test jobs using the same workspace. Cypress orb saves and loads the workspace between the jobs automatically
+
+```yml
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
+workflows:
+  build:
+    jobs:
+      - cypress/install
+      - cypress/run:
+          requires:
+            - cypress/install
+          start: npm start
+          wait-on: 'http://localhost:8080'
+          no-workspace: true
+          record: true
+          tags: circleci
+          parallel: true
+          parallelism: 2
+```
+
++++
+### Two jobs in the workflow
+
+![Workflow with two jobs](./images/workflow.png)
+
++++
+### Machines view
+
+![Machines view on Cypress Dashboard](./images/machines.png)
+
++++
+### Parallelization calculator
+
+![How fast would tests be if we run them on N machines](./images/calculator.png)
+
++++
+### TODO: Check if 4 machines really take 10 seconds
+
+```diff
+- parallelism: 2
++ parallelism: 4
+```
+
++++
+![Three machines joined in time](./images/only-3.png)
+
+---
+## TODO
+
+- build app (once) after installing dependencies
+- run tests in several groups
+- print Cypress info
+- run tests using Chrome or Firefox browser
+- store test artifacts on CircleCI
+- run tests on Windows, or Mac
+
+---
+## Learn more
+
+- "Start CircleCI Machines Faster by Using RAM Disk" at https://glebbahmutov.com/blog/circle-ram-disk/ Jan 2021
+- "Make Cypress Run Faster by Splitting Specs" at https://glebbahmutov.com/blog/split-spec/ Dec 2020
+- "Faster, easier, end-to-end testing with CircleCI and Cypress" at https://www.youtube.com/watch?v=v7FCj2LOWgE Oct 2020
+
+---
+## ⌛️ Review
+
+- using [cypress-io/circleci-orb](github.com/cypress-io/circleci-orb) is the simplest way to install, cache, and run Cypress tests on CircleCI
+- running tests in parallel is as simple as `parallelism: N`
+- the orb passes the files through the workspace automatically
+
+Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action), [CircleCI](/?p=circleci), [Netlify Build](/?p=netlify-build)

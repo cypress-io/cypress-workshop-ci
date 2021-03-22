@@ -391,4 +391,4 @@ jobs:
 - run parallel jobs to speed up the tests
 - separate jobs in the workflow when makes sense
 
-Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action)
+Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action), [CircleCI](/?p=circleci), [Netlify Build](/?p=netlify-build)
