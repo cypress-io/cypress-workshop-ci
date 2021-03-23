@@ -34,6 +34,38 @@ GitHub Action | [github-action](./slides/github-action/README.md) | [github acti
 Circle CI Orb | [circleci](./slides/circleci/README.md) | [circleci slides](https://cypress-workshop-ci.netlify.app/?p=circleci)
 Netlify Build plugin | [netlify-build](./slides/netlify-build/README.md) | [netlify build slides](https://cypress-workshop-ci.netlify.app/?p=netlify-build)
 
+## Content index
+
+1. Introduction [slides](https://cypress-workshop-ci.netlify.app/?p=intro)
+   1. requirements
+   2. example repo [cypress-io/cypress-workshop-ci-example](https://github.com/cypress-io/cypress-workshop-ci-example)
+   3. NPM scripts and commands
+   4. Cypress binary and info
+2. Running Cypress on generic CI [slides](https://cypress-workshop-ci.netlify.app/?p=generic-ci)
+   1. GitHub CI workflow
+   2. caching dependencies
+   3. waiting for the server to start
+   4. storing test artifacts on CI
+   5. recording tests on Cypress Dashboard
+3. Cypress GitHub Action [slides](https://cypress-workshop-ci.netlify.app/?p=github-action)
+   1. installing and running Cypress using action
+   2. building the application
+   3. action versions
+   4. run tests in parallel
+   5. split workflow into jobs
+4. Cypress CircleCI Orb [slides] (https://cypress-workshop-ci.netlify.app/?p=circleci)
+   1. running the tests
+   2. recording the test artifacts
+   3. saving the workspace
+   4. testing in parallel
+5. Cypress Netlify plug [slides] (https://cypress-workshop-ci.netlify.app/?p=netlify-build)
+   1. deploy project on Netlify
+   2. run E2E tests after deploy
+   3. recording test results
+   4. run E2E tests before build
+   5. set up Cypress GitHub Integration
+   6. set up GitHub status checks
+
 ## Example application
 
 We will test the example application from the repo [cypress-io/cypress-workshop-ci-example](https://github.com/cypress-io/cypress-workshop-ci-example). You should fork that repo under your GitHub account and use with each CI provider.

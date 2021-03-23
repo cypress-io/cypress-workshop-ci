@@ -88,7 +88,6 @@ workflows:
 ![Successful CircleCI job](./images/all-steps.png)
 
 +++
-
 ### Todo: remove "persisting to workspace" step
 
 We only have the single test job, and do not intend to run any more jobs using this workspace. Thus we can skip saving the workspace to save time.
@@ -121,8 +120,8 @@ workflows:
 
 +++
 ![Set CYPRESS_RECORD_KEY variable](./images/key.png)
-+++
 
++++
 ### TODO: Set the project to record
 
 Look up the record option at [github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb)
