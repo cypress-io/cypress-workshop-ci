@@ -95,3 +95,132 @@ publish = "_site"
 ### Note that the tests are failing
 
 ![Netlify tests failed](./images/fails.png)
+
++++
+### TODO set up test recording
+
+💡 Tip: see [github.com/cypress-io/netlify-plugin-cypress](https://github.com/cypress-io/netlify-plugin-cypress)
+
++++
+```toml
+[build]
+command = "npm run build"
+publish = "_site"
+[build.environment]
+  TERM = "xterm"
+[[plugins]]
+  package = "netlify-plugin-cypress"
+  [plugins.inputs]
+    record = true
+```
++++
+
+![Set CYPRESS_RECORD_KEY on Netlify](./images/netlify-record-key.png)
+
++++
+
+![Record test run on Netlify](./images/recorded.png)
+
+---
+### TODO: fix the test
+
+![Failed test screenshot](./images/readme.png)
+
++++
+```diff
+- cy.location('pathname').should('equal', '/README/')
++ cy.location('pathname').should('match', /\/readme\//i)
+```
+
+---
+### TODO: set your tag and group names
+
+![Tag and group](./images/tag-and-group.png)
+
+💡 Tip: see [github.com/cypress-io/netlify-plugin-cypress](https://github.com/cypress-io/netlify-plugin-cypress)
+
+---
+> Why is Netlify deploy green if the E2E tests failed?
+
+Full answer in the webinar "Build, Deploy, and Test" https://cypress.slides.com/cypress-io/build-deploy-and-test
+
++++
+### Deploy phases
+
+- Start
+  - *preBuild*
+- Build
+  - *postBuild*
+- Deploy
+  - *onSuccess*
+
+By default, Cypress tests run in the "onSuccess" step
+
++++
+### Enable tests in *preBuild*
+
+💡 Tip: see [github.com/cypress-io/netlify-plugin-cypress](https://github.com/cypress-io/netlify-plugin-cypress)
+
++++
+```toml
+[build]
+command = "npm run build"
+publish = "_site"
+[build.environment]
+  TERM = "xterm"
+[[plugins]]
+  package = "netlify-plugin-cypress"
+  [plugins.inputs]
+    record = true
+  # run Cypress tests before building and deploying
+  [plugins.inputs.preBuild]
+    enable = true
+    # call the same commands as we do locally
+    start = 'eleventy --serve'
+    wait-on = 'http://localhost:8080'
+    record = true
+```
+
+---
+**Todo:** run all tests pre-deploy and smoke tests after deploy
+
+💡 Tip: see [github.com/cypress-io/netlify-plugin-cypress](https://github.com/cypress-io/netlify-plugin-cypress)
+
+---
+## Netlify Build uses 1 machine
+
+💡 If you need to run lots of tests after deploy you might want to use another CI, for example [github.com/bahmutov/netlify-plugin-github-dispatch](https://github.com/bahmutov/netlify-plugin-github-dispatch)
+
+---
+## GitHub Status Checks
+
+We want Cypress Dashboard to set the status on every pull request.
+
+- Cypress GH App [on.cypress.io/github-integration](https://on.cypress.io/github-integration)
+- Cypress GitLab integration [on.cypress.io/gitlab-integration](https://on.cypress.io/gitlab-integration)
+- Bitbucket integration [on.cypress.io/bitbucket-integration](https://on.cypress.io/bitbucket-integration)
+
++++
+![Cypress GH App repo](./images/give-access.png)
+
++++
+![Enable Cypress GH App from the project's settings](./images/enable-gh.png)
+
++++
+## Open a new pull request
+
+**🚨 use your repo** and not `cypress-io/cypress-workshop-ci-example`
+
++++
+### See the GitHub status checks
+
+![Pull request status checks from CI and from Cypress](./images/pr-checks.png)
+
+---
+## ⌛️ Review
+
+- use the [github.com/cypress-io/netlify-plugin-cypress](https://github.com/cypress-io/netlify-plugin-cypress) to run E2E tests as part of Netlify Build
+- record test results to Cypress Dashboard
+- run tests pre-deploy and use Cypress GitHub Integration App
+
+Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action), [CircleCI](/?p=circleci), [Netlify Build](/?p=netlify-build)
