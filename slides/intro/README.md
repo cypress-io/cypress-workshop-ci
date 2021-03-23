@@ -12,6 +12,7 @@ Jump to: [Generic CI](/?p=generic-ci), [GitHub Action](/?p=github-action), [Circ
 - Distinguished Engineer at Cypress
 - gleb (at) cypress.io
 - [@bahmutov](https://twitter.com/bahmutov)
+- [https://glebbahmutov.com](https://glebbahmutov.com)
 - [https://glebbahmutov.com/blog/tags/cypress/](https://glebbahmutov.com/blog/tags/cypress/)
 - [https://www.youtube.com/glebbahmutov](https://www.youtube.com/glebbahmutov)
 
