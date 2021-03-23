@@ -53,12 +53,12 @@ Netlify Build plugin | [netlify-build](./slides/netlify-build/README.md) | [netl
    3. action versions
    4. run tests in parallel
    5. split workflow into jobs
-4. Cypress CircleCI Orb [slides] (https://cypress-workshop-ci.netlify.app/?p=circleci)
+4. Cypress CircleCI Orb [slides](https://cypress-workshop-ci.netlify.app/?p=circleci)
    1. running the tests
    2. recording the test artifacts
    3. saving the workspace
    4. testing in parallel
-5. Cypress Netlify plug [slides] (https://cypress-workshop-ci.netlify.app/?p=netlify-build)
+5. Cypress Netlify plug [slides](https://cypress-workshop-ci.netlify.app/?p=netlify-build)
    1. deploy project on Netlify
    2. run E2E tests after deploy
    3. recording test results
