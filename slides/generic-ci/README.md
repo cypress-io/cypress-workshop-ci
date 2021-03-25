@@ -130,7 +130,7 @@ jobs:
           # use key string with "v1" for simple cache invalidation
           # use precise key to avoid cache "snowballing"
           # https://glebbahmutov.com/blog/do-not-let-cypress-cache-snowball/
-          key: dependencies-v1-${{ runner.os }}-${{ hashFiles('**/package-lock.lock') }}
+          key: dependencies-v1-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies 📦
         run: npm ci
