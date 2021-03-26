@@ -77,6 +77,24 @@ find the:
 - running tests
 
 ---
+### If you are using Yarn
+
+```diff
+  version: 2.1
+  orbs:
+    cypress: cypress-io/cypress@1
+  workflows:
+    build:
+      jobs:
+        # "cypress" is the name of the imported orb
+        # "run" is the name of the job defined in Cypress orb
+        - cypress/run:
++           yarn: true
+            start: npm start
+            wait-on: 'http://localhost:8080'
+```
+
+---
 ### Workspace
 
 Cypress Orb automatically passes all files from one job to another using Cypress _workspace_. But saving it takes time.
@@ -266,6 +284,15 @@ workflows:
 ### Two jobs in the workflow
 
 ![Workflow with two jobs](./images/workflow.png)
+
++++
+### Install using Yarn
+
+```diff
+- - cypress/install
++ - cypress/install:
++     yarn: true
+```
 
 ---
 ## Parallel testing
