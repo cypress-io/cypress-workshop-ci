@@ -16,8 +16,14 @@ You don't need to fiddle with caching, installation, flags, recording, etc. Let 
 ```yml
 version: 2.1
 orbs:
+  # use cypress orb in your workflow
   cypress: cypress-io/cypress@1
-# use cypress orb in your workflow
+workflows:
+  build:
+    jobs:
+      - cypress/run:
+          start: npm start
+          wait-on: 'http://localhost:8080'
 ```
 
 Repo [github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb)
@@ -36,10 +42,14 @@ workflows:
     jobs:
       # "cypress" is the name of the imported orb
       # "run" is the name of the job defined in Cypress orb
-      - cypress/run
+      - cypress/run:
+          start: npm start
+          wait-on: 'http://localhost:8080'
 ```
 
 Commit and push the code.
+
+`start`, `wait-on` parameters [github.com/cypress-io/circleci-orb#examples](https://github.com/cypress-io/circleci-orb#examples)
 
 +++
 ### Create CircleCI project
@@ -56,34 +66,20 @@ Commit and push the code.
 ![The CircleCI build is running](./images/02-circle.png)
 
 +++
-### Build steps
+### TODO: look at CircleCI steps
 
-![Circle build steps](./images/build-steps.png)
-
-+++
-### TODO: fix the build
-
-Need to start the server and wait for the URL to respond
-
-**💡 Hint:** look at the examples in [github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb)
-
-+++
-
-```yml
-version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1
-workflows:
-  build:
-    jobs:
-      # "cypress" is the name of the imported orb
-      # "run" is the name of the job defined in Cypress orb
-      - cypress/run:
-          start: npm start
-          wait-on: 'http://localhost:8080'
-```
+find the:
+- container info
+- code check out
+- caching
+- installation
+- starting the app
+- running tests
 
 ---
+### Workspace
+
+Cypress Orb automatically passes all files from one job to another using Cypress _workspace_. But saving it takes time.
 
 ![Successful CircleCI job](./images/all-steps.png)
 
@@ -108,6 +104,8 @@ workflows:
           wait-on: 'http://localhost:8080'
           no-workspace: true
 ```
+
+`no-workspace` parameter [github.com/cypress-io/circleci-orb#examples](https://github.com/cypress-io/circleci-orb#examples)
 
 +++
 ![Fast workflow](./images/fast.png)
