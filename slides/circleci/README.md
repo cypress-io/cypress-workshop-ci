@@ -13,20 +13,9 @@
 
 You don't need to fiddle with caching, installation, flags, recording, etc. Let us (Cypress authors) write the CI configuration code.
 
-```yml
-version: 2.1
-orbs:
-  # use cypress orb in your workflow
-  cypress: cypress-io/cypress@1
-workflows:
-  build:
-    jobs:
-      - cypress/run:
-          start: npm start
-          wait-on: 'http://localhost:8080'
-```
-
 Repo [github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb)
+
+⚠️ You might have to enable 3rd party orbs in your CircleCI settings, see [github.com/cypress-io/circleci-orb#how-to-enable](https://github.com/cypress-io/circleci-orb#how-to-enable)
 
 ---
 ### TODO: try running the simplest job
@@ -95,6 +84,20 @@ find the:
 ```
 
 ---
+### Versions
+
+We publish orbs to CircleCI registry and to GitHub
+
+- [circleci.com/developer/orbs](https://circleci.com/developer/orbs)
+- [github.com/cypress-io/circleci-orb/releases](https://github.com/cypress-io/circleci-orb/releases)
+
+Picking the version of the orb to use:
+
+- `cypress-io/cypress@1` is the latest v1 version of the orb
+- `cypress-io/cypress@1.2` is the latest v1.2 version of the orb
+- `cypress-io/cypress@1.19.3` is the specific version
+
+---
 ### Workspace
 
 Cypress Orb automatically passes all files from one job to another using Cypress _workspace_. But saving it takes time.
@@ -106,7 +109,7 @@ Cypress Orb automatically passes all files from one job to another using Cypress
 
 We only have the single test job, and do not intend to run any more jobs using this workspace. Thus we can skip saving the workspace to save time.
 
-**💡 Hint:** look at the examples in [github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb)
+**💡 Hint:** look at the examples in [github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb). Answer ⏬
 
 +++
 
@@ -132,7 +135,7 @@ workflows:
 ### Record the test results
 
 - Look up the project's recording key at `https://dashboard.cypress.io/projects/<id>/settings`
-- Add to the CircleCI project's settings
+- Add `CYPRESS_RECORD_KEY` to the CircleCI project's settings
 
 +++
 ![Set CYPRESS_RECORD_KEY variable](./images/key.png)
@@ -140,7 +143,7 @@ workflows:
 +++
 ### TODO: Set the project to record
 
-Look up the record option at [github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb)
+Look up the record option at [github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb). Answer ⏬
 
 **Bonus:** add tag to separate the recorded runs from CircleCI from other CIs
 +++
