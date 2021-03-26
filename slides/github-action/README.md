@@ -41,12 +41,15 @@ jobs:
           # during this CI step
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 ```
-Use the above workflow and inspect the run
+Use the above workflow and inspect the run.
+
+💡 Our GH Action automatically uses `package-lock.json` or `yarn.lock` file to pick the right install command.
 
 +++
 ## TODO: Look at the action examples
 
-[github.com/cypress-io/github-action#examples](https://github.com/cypress-io/github-action#examples)
+- [github.com/cypress-io/github-action#examples](https://github.com/cypress-io/github-action#examples) shows example for each parameter
+- [github.com/cypress-io/github-action#more-examples](https://github.com/cypress-io/github-action#more-examples) has links to example repositories
 
 +++
 ## TODO: show cypress info
