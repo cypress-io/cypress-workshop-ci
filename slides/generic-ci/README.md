@@ -158,7 +158,43 @@ Push a few commits to see the caching timings
 
 ![Caching dropped time from 50 to 20 seconds](./images/caching-works.png)
 
-+++
+---
+### Yarn users
+
+```yml
+name: ci
+on: [push]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies 💎
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache
+          # use key string with "v1" for simple cache invalidation
+          # use precise key to avoid cache "snowballing"
+          # https://glebbahmutov.com/blog/do-not-let-cypress-cache-snowball/
+          key: dependencies-v1-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies 📦
+        run: yarn --frozen-lockfile
+
+      - name: Build the app 🏗
+        run: npm run build
+
+      - name: Start the app 📤
+        run: npm start &
+
+      - name: Run Cypress tests 🧪
+        run: npm run cy:run
+
+```
+
+---
 ## ⚠️ Caching usually needs two commands
 
 Typically CIs have one command to restore previous cache and another command to save the cache.

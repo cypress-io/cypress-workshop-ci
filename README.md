@@ -20,7 +20,7 @@ You will need:
 
 ## Slides 🖥
 
-See the presentation at [https://cypress-workshop-ci.netlify.app/][presentation]. Every section of the presentation has a subfolder in the [slides](./slides) folder with a Markdown file. The Markdown is rendered into HTML using [Vite and Reveal.js combination](https://glebbahmutov.com/blog/reveal-vite/). You can open the presentation by clicking on "link" in the table below.
+See the presentation at [https://cypress-workshop-ci.netlify.app/][presentation]. Every section of the presentation has a subfolder in the [slides](./slides) folder with a Markdown file. The Markdown is rendered into HTML using [Vite and Reveal.js combination](https://glebbahmutov.com/blog/reveal-vite/). You can open the presentation by clicking on "view slides" links in the table below.
 
 [presentation]: https://cypress-workshop-ci.netlify.app/
 
@@ -57,7 +57,8 @@ Netlify Build plugin | [netlify-build](./slides/netlify-build/README.md) | [netl
    1. running the tests
    2. recording the test artifacts
    3. saving the workspace
-   4. testing in parallel
+   4. separate the install job from the test job
+   5. testing in parallel
 5. Cypress Netlify plug [slides](https://cypress-workshop-ci.netlify.app/?p=netlify-build)
    1. deploy project on Netlify
    2. run E2E tests after deploy
