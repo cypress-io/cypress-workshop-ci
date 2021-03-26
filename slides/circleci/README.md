@@ -144,6 +144,8 @@ workflows:
           tags: circleci
 ```
 
+[github.com/cypress-io/circleci-orb#record-on-dashboard](https://github.com/cypress-io/circleci-orb#record-on-dashboard)
+
 +++
 
 ![Dashboard run with tags](./images/tags.png)
@@ -235,10 +237,42 @@ workflows:
 ```
 
 ---
+### Separate the install job from the test job
+
+Later it will allow us to run multiple test jobs in parallel
+
+```yml
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
+workflows:
+  build:
+    jobs:
+      - cypress/install
+      - cypress/run:
+          requires:
+            - cypress/install
+          install-command: echo 'Everything was already installed'
+          start: npm start
+          wait-on: 'http://localhost:8080'
+          no-workspace: true
+          record: true
+          tags: circleci
+```
+
+**💡 Tip:** find our CircleCI workflow recipes in [github.com/cypress-io/circleci-orb/blob/master/docs/recipes.md](https://github.com/cypress-io/circleci-orb/blob/master/docs/recipes.md)
+
++++
+### Two jobs in the workflow
+
+![Workflow with two jobs](./images/workflow.png)
+
+---
 ## Parallel testing
 
 ```diff
   - cypress/run:
+-     install-command: echo 'Everything was already installed'
       start: npm start
       wait-on: 'http://localhost:8080'
       no-workspace: true
@@ -248,11 +282,9 @@ workflows:
 +     parallelism: 2
 ```
 
-[github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb)
+When we use `parallel: true` parameter, it implies no install is necessary. See [github.com/cypress-io/circleci-orb](https://github.com/cypress-io/circleci-orb).
 
-+++
-
-![Failed job](./images/failed.png)
+Full workflow on the next slide ⏬
 
 +++
 We need to install dependencies using 1 job, then run multiple test jobs using the same workspace. Cypress orb saves and loads the workspace between the jobs automatically
@@ -278,11 +310,6 @@ workflows:
 ```
 
 +++
-### Two jobs in the workflow
-
-![Workflow with two jobs](./images/workflow.png)
-
-+++
 ### Machines view
 
 ![Machines view on Cypress Dashboard](./images/machines.png)
@@ -300,6 +327,8 @@ workflows:
 + parallelism: 4
 ```
 
+**🏎 tip:** CircleCI gives 4 parallel containers for free for open source public projects.
+
 +++
 ![Three machines joined in time](./images/only-3.png)
 
@@ -314,8 +343,14 @@ workflows:
 - run tests on Windows, or Mac
 
 ---
-## Learn more
+## Learn more 🎓
 
+### Resources 📚
+
+- [github.com/cypress-io/circleci-orb/blob/master/docs/examples.md](https://github.com/cypress-io/circleci-orb/blob/master/docs/examples.md)
+- [github.com/cypress-io/circleci-orb/blob/master/docs/recipes.md](https://github.com/cypress-io/circleci-orb/blob/master/docs/recipes.md)
+
+### Blogs and talks 📝
 - "Start CircleCI Machines Faster by Using RAM Disk" at https://glebbahmutov.com/blog/circle-ram-disk/ Jan 2021
 - "Make Cypress Run Faster by Splitting Specs" at https://glebbahmutov.com/blog/split-spec/ Dec 2020
 - "Faster, easier, end-to-end testing with CircleCI and Cypress" at https://www.youtube.com/watch?v=v7FCj2LOWgE Oct 2020
