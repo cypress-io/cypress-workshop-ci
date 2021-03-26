@@ -28,6 +28,10 @@ Repo [github.com/cypress-io/netlify-plugin-cypress](https://github.com/cypress-i
 ### You can change the site name
 
 ![Netlify site name](./images/site-name.png)
+---
+### Yarn users
+
+Netlify automatically detects if you are using `package-lock.json` or `yarn.lock` file to pick the right install command.
 
 ---
 ## Use Netlify.toml file
