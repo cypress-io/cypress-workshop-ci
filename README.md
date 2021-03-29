@@ -34,6 +34,10 @@ GitHub Action | [github-action](./slides/github-action/README.md) | [github acti
 Circle CI Orb | [circleci](./slides/circleci/README.md) | [circleci slides](https://cypress-workshop-ci.netlify.app/?p=circleci)
 Netlify Build plugin | [netlify-build](./slides/netlify-build/README.md) | [netlify build slides](https://cypress-workshop-ci.netlify.app/?p=netlify-build)
 
+## Self-paced workshop
+
+This workshop should have all the content necessary to learn how to run Cypress on continuous integration service. Use the example application and follow the written steps above. I suggest starting with the introduction and then picking one of the topics matching your situation. If you get stuck, or something is unclear, do not hesitate to open a GitHub issue in this repository to improve this workshop.
+
 ## Content index
 
 1. Introduction [slides](https://cypress-workshop-ci.netlify.app/?p=intro)
